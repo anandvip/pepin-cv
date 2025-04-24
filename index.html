@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pragya Anand - UI/UX Designer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Custom Variables */
         :root {
@@ -15,6 +18,7 @@
             --text-color: #424242;
             --section-padding: 2rem;
             --transition: all 0.3s ease;
+            --font-family: 'Poppins', sans-serif; /* Default font, can be switched */
         }
 
         /* Base Styles */
@@ -25,10 +29,11 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: var(--font-family);
             line-height: 1.6;
             color: var(--text-color);
             background-color: #fafafa;
+            transition: font-family 0.3s ease;
         }
 
         .container {
@@ -110,6 +115,7 @@
         .nav-links {
             display: flex;
             list-style: none;
+            transition: var(--transition);
         }
 
         .nav-links li {
@@ -141,6 +147,7 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 101;
         }
 
         /* Hero Section */
@@ -171,15 +178,10 @@
             align-items: center;
             justify-content: center;
             box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.1);
-             background-image: url('https://raw.githubusercontent.com/anandvip/pepin-cv/refs/heads/main/pepin2.jpeg');
-            background-position:center 25%;
-            background-size:cover;
+            background-image: url('https://raw.githubusercontent.com/anandvip/pepin-cv/refs/heads/main/pepin2.jpeg');
+            background-position: center 25%;
+            background-size: cover;
         }
-
-        .hero-image img {
-            max-width: 80%;
-            border-radius: 20px;
-           }
 
         .hero h1 {
             font-size: 3rem;
@@ -438,6 +440,36 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Hobbies Section */
+        .hobbies-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hobby-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 2rem;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .hobby-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
         /* Contact Section */
         .contact {
             background-color: var(--light-color);
@@ -456,6 +488,11 @@
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
         }
 
         .contact-icon {
@@ -470,10 +507,25 @@
             color: var(--primary-color);
             font-size: 1.2rem;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            background-color: var(--primary-color);
+            color: white;
         }
 
         .contact-text h4 {
             margin-bottom: 0.25rem;
+        }
+
+        .contact-text a {
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .contact-text a:hover {
+            color: var(--primary-color);
         }
 
         .contact-form {
@@ -517,10 +569,17 @@
         }
 
         .footer-social {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
             color: white;
             margin: 0 0.5rem;
             font-size: 1.2rem;
@@ -528,12 +587,50 @@
         }
 
         .footer-social a:hover {
-            color: var(--secondary-color);
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
         }
 
         .footer-text {
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Font Switcher */
+        .font-switcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .font-option {
+            margin: 0 0.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .font-option.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
         }
 
         /* Responsive Design */
@@ -547,7 +644,7 @@
             .hero-image {
                 position: relative;
                 width: 80%;
-                height: auto;
+                height: 300px;
                 margin: 2rem auto;
                 right: auto;
                 top: auto;
@@ -555,7 +652,7 @@
                 border-radius: 30px;
             }
 
-            .about-content {
+            .about-content, .contact-container {
                 flex-direction: column;
             }
 
@@ -567,34 +664,46 @@
                 width: 100%;
                 padding-left: 70px;
                 padding-right: 20px;
-            }
-
-            .timeline-item:nth-child(even) {
-                left: 0;
+                left: 0 !important;
             }
 
             .timeline-item::after {
-                left: 20px;
-            }
-
-            .timeline-item:nth-child(odd)::after {
-                right: auto;
-                left: 20px;
+                left: 20px !important;
+                right: auto !important;
             }
 
             .education-cards {
                 flex-direction: column;
                 align-items: center;
             }
-
-            .contact-container {
-                flex-direction: column;
-            }
         }
 
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 80%;
+                max-width: 300px;
+                background-color: var(--dark-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.4s ease;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .nav-links a {
+                color: white;
+                font-size: 1.2rem;
             }
 
             .mobile-menu {
@@ -607,6 +716,11 @@
 
             .hero p {
                 font-size: 1rem;
+            }
+            
+            /* Hamburger Menu Animation */
+            .mobile-menu i.fa-times {
+                transform: rotate(180deg);
             }
         }
     </style>
@@ -633,21 +747,22 @@
 
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content fade-in">
                 <div class="hero-subtitle">Hello, I'm</div>
                 <h1>Pragya Anand</h1>
                 <h3>UI/UX Designer</h3>
                 <p>Creative and user-focused UI/UX Designer with experience in designing intuitive digital experiences for startups and well-established brands. Passionate about creating beautiful, functional designs that solve real problems.</p>
                 <a href="#contact" class="btn">Get In Touch</a>
                 <div class="social-links">
-                    <a href="https://linkedin.com/in/pragya07/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:iampragyaanand@gmail.com"><i class="fas fa-envelope"></i></a>
-                    <a href="#"><i class="fab fa-dribbble"></i></a>
-                    <a href="#"><i class="fab fa-behance"></i></a>
+                    <a href="https://linkedin.com/in/pragya07/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:iampragyaanand@gmail.com" aria-label="Email Me"><i class="fas fa-envelope"></i></a>
+                    <a href="#" aria-label="Dribbble Profile"><i class="fab fa-dribbble"></i></a>
+                    <a href="#" aria-label="Behance Profile"><i class="fab fa-behance"></i></a>
                 </div>
             </div>
             <div class="hero-image">
-<!--                 <img src="https://raw.githubusercontent.com/anandvip/pepin-cv/refs/heads/main/pepin2.jpeg" alt="Pragya Anand"> -->
+                <!-- Background image is set in CSS using the URL:
+                https://raw.githubusercontent.com/anandvip/pepin-cv/refs/heads/main/pepin2.jpeg -->
             </div>
         </div>
     </section>
@@ -768,23 +883,23 @@
     <section id="hobbies" class="about">
         <div class="container">
             <h2 class="section-title">Hobbies & Interests</h2>
-            <div class="hobbies-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-top: 2rem;">
-                <div class="hobby-card" style="background-color: var(--light-color); border-radius: 10px; padding: 2rem; width: 250px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: var(--transition);">
-                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+            <div class="hobbies-container">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
                         <i class="fas fa-hand-scissors"></i>
                     </div>
                     <h3>Crocheting</h3>
                     <p>Creating handmade textiles and exploring different patterns and techniques.</p>
                 </div>
-                <div class="hobby-card" style="background-color: var(--light-color); border-radius: 10px; padding: 2rem; width: 250px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: var(--transition);">
-                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
                         <i class="fas fa-book"></i>
                     </div>
                     <h3>Reading</h3>
                     <p>Exploring new ideas and perspectives through books on design, fiction, and personal development.</p>
                 </div>
-                <div class="hobby-card" style="background-color: var(--light-color); border-radius: 10px; padding: 2rem; width: 250px; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: var(--transition);">
-                    <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
                         <i class="fas fa-pencil-alt"></i>
                     </div>
                     <h3>Sketching</h3>
@@ -805,7 +920,7 @@
                         </div>
                         <div class="contact-text">
                             <h4>Phone</h4>
-                            <p>+91 74190-40375</p>
+                            <p><a href="tel:+917419040375">+91 74190-40375</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -814,7 +929,7 @@
                         </div>
                         <div class="contact-text">
                             <h4>Email</h4>
-                            <p>iampragyaanand@gmail.com</p>
+                            <p><a href="mailto:iampragyaanand@gmail.com">iampragyaanand@gmail.com</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -823,7 +938,7 @@
                         </div>
                         <div class="contact-text">
                             <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/pragya07</p>
+                            <p><a href="https://linkedin.com/in/pragya07/" target="_blank">linkedin.com/in/pragya07</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -860,10 +975,10 @@
     <footer>
         <div class="container">
             <div class="footer-social">
-                <a href="https://linkedin.com/in/pragya07/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:iampragyaanand@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="#"><i class="fab fa-dribbble"></i></a>
-                <a href="#"><i class="fab fa-behance"></i></a>
+                <a href="https://linkedin.com/in/pragya07/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:iampragyaanand@gmail.com" aria-label="Email Me"><i class="fas fa-envelope"></i></a>
+                <a href="#" aria-label="Dribbble Profile"><i class="fab fa-dribbble"></i></a>
+                <a href="#" aria-label="Behance Profile"><i class="fab fa-behance"></i></a>
             </div>
             <div class="footer-text">
                 <p>&copy; 2025 Pragya Anand. All Rights Reserved.</p>
@@ -871,8 +986,82 @@
         </div>
     </footer>
 
+    <!-- Font Switcher -->
+    <div class="font-switcher">
+        <span class="font-option active" data-font="Poppins">Poppins</span>
+        <span>|</span>
+        <span class="font-option" data-font="Montserrat">Montserrat</span>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                // Toggle between bars and times icon
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-bars')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+
+            // Font Switcher
+            const fontOptions = document.querySelectorAll('.font-option');
+            
+            fontOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove active class from all options
+                    fontOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // Add active class to clicked option
+                    this.classList.add('active');
+                    
+                    // Change the font
+                    const font = this.getAttribute('data-font');
+                    document.documentElement.style.setProperty('--font-family', `'${font}', sans-serif`);
+                    
+                    // Apply the font directly to the body as well (for better browser compatibility)
+                    document.body.style.fontFamily = `'${font}', sans-serif`;
+                    
+                    // Store the selected font in localStorage for persistence
+                    localStorage.setItem('preferred-font', font);
+                });
+            });
+            
+            // Load saved font preference if it exists
+            const savedFont = localStorage.getItem('preferred-font');
+            if (savedFont) {
+                document.documentElement.style.setProperty('--font-family', `'${savedFont}', sans-serif`);
+                document.body.style.fontFamily = `'${savedFont}', sans-serif`;
+                
+                // Update the active class on the font switcher
+                fontOptions.forEach(option => {
+                    if (option.getAttribute('data-font') === savedFont) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
+            }
+
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -890,20 +1079,13 @@
                 });
             });
 
-            // Mobile menu toggle
-            const mobileMenuBtn = document.querySelector('.mobile-menu');
-            const navLinks = document.querySelector('.nav-links');
-            
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            });
-
             // Form submission (prevent default for demo)
             const contactForm = document.querySelector('.contact-form form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('Thank you for your message! This is a demo form, so no message was actually sent.');
+                    alert('Thank you for your message! I will get back to you soon.');
+                    this.reset();
                 });
             }
         });
