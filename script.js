@@ -77,10 +77,15 @@ function createNebulaEffect() {
 function setupMobileMenu() {
     const mobileMenuBtn = document.querySelector('.mobile-menu');
     const navLinks = document.querySelector('.nav-links');
+    const body = document.querySelector('body');
     
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', function() {
+            // Toggle active class for mobile menu
             navLinks.classList.toggle('active');
+            
+            // Toggle overlay class on body
+            body.classList.toggle('menu-open');
             
             // Toggle between bars and times icon
             const icon = this.querySelector('i');
@@ -100,6 +105,7 @@ function setupMobileMenu() {
         menuLinks.forEach(link => {
             link.addEventListener('click', function() {
                 navLinks.classList.remove('active');
+                body.classList.remove('menu-open');
                 const icon = mobileMenuBtn.querySelector('i');
                 if (icon) {
                     icon.classList.remove('fa-times');
@@ -108,6 +114,21 @@ function setupMobileMenu() {
             });
         });
     }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (navLinks.classList.contains('active') && 
+            !navLinks.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target)) {
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+    });
 }
 
 // Font Switcher
