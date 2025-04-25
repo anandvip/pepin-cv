@@ -161,7 +161,7 @@ nav {
 }
 
 .logo img {
-    height: 40px;
+    height: 90px;
     width: auto;
     transition: var(--transition);
 }
